@@ -83,7 +83,7 @@ public class Assn5 {
     private static void demoSJF() {
         Platform platform = new Platform(cpuCount);
         Queue<Process> processes = new LinkedList<>();
-    
+
         if (inputFile != null) {
             // Process the SJF Section
             for (String[] items : readSection("sjf")){
@@ -94,13 +94,12 @@ public class Assn5 {
                 processes.add(new Process(name, start, burst, total));
             }
         } else {
-            // Default values for SJF
             processes.add(new Process("P1", 0, 6, 6));
             processes.add(new Process("P2", 0, 8, 8));
             processes.add(new Process("P3", 0, 7, 7));
             processes.add(new Process("P4", 0, 3, 3));
         }
-    
+
         System.out.println("Starting Shortest Job First CPU scheduling simulation");
         Scheduler scheduler = new SchedulerSJF(platform);
         platform.simulate(scheduler, processes);

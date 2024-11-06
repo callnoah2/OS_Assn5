@@ -11,7 +11,7 @@ public class SchedulerRR extends Scheduler {
         this.platform = platform;
         this.timeQuantum = timeQuantum;
         this.queue = new LinkedList<>();
-        this.timeSliceRemaining = timeQuantum; // Initialize remaining time slice
+        this.timeSliceRemaining = timeQuantum;
     }
 
     @Override
@@ -32,7 +32,6 @@ public class SchedulerRR extends Scheduler {
             return queue.poll();              // Get the next process in the queue
         }
 
-        // Decrement the time slice remaining for the current process
         timeSliceRemaining--;
 
         // Check if the time slice has expired

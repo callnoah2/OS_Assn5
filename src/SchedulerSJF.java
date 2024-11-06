@@ -17,14 +17,14 @@ public class SchedulerSJF extends Scheduler {
 
     @Override
     public Process update(Process runningProcess, int cpu) {
-        if (runningProcess != null && runningProcess.getBurstTime() <= 0) { // Assuming a burst time of 0 indicates completion
+        if (runningProcess != null && runningProcess.getBurstTime() <= 0) {
             runningProcess = null;
         }
 
         if (runningProcess == null && !readyQueue.isEmpty()) {
             runningProcess = readyQueue.poll();
             platform.log("CPU " + cpu + " is now running process " + runningProcess.getName());
-            contextSwitches++; // Use `contextSwitches` inherited from Scheduler
+            contextSwitches++;
         }
 
         if (runningProcess != null) {

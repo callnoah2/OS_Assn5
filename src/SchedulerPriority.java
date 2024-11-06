@@ -16,7 +16,7 @@ public class SchedulerPriority extends Scheduler {
                 } else if (p1.getPriority() > p2.getPriority()) {
                     return 1;
                 } else {
-                    return 0; // Equal priority, no preference
+                    return 0;
                 }
             }
         });
@@ -47,8 +47,8 @@ public class SchedulerPriority extends Scheduler {
                     " for process " + nextProcess.getName() +
                     " with priority " + nextProcess.getName());
             contextSwitches++;
-            queue.add(currentProcess); // Re-add the current process to the queue
-            return queue.poll();       // Schedule the process with the highest priority
+            queue.add(currentProcess); 
+            return queue.poll();
         }
 
         // Continue with the current process if no higher-priority process is ready

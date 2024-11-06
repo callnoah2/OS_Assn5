@@ -3,6 +3,12 @@ import java.util.Queue;
 
 public class SchedulerFCFS extends Scheduler {
     private Queue<Process> readyQueue = new LinkedList<>();
+    private Platform platform;
+
+    // Constructor that accepts Platform as a parameter
+    public SchedulerFCFS(Platform platform) {
+        this.platform = platform;
+    }
 
     @Override
     public void notifyNewProcess(Process process) {
@@ -18,6 +24,7 @@ public class SchedulerFCFS extends Scheduler {
             if (currentProcess != null) {
                 // Increment context switch count
                 contextSwitches++;
+                platform.log("Context switch to process: " + currentProcess.getName());
             }
         }
 

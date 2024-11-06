@@ -1,8 +1,7 @@
 import java.util.PriorityQueue;
 
-public class SchedulerSJF implements Scheduler {
+public class SchedulerSJF extends Scheduler {
     private Platform platform;
-    private int numberOfContextSwitches = 0;
     private PriorityQueue<Process> readyQueue;
 
     public SchedulerSJF(Platform platform) {
@@ -18,24 +17,20 @@ public class SchedulerSJF implements Scheduler {
 
     @Override
     public Process update(Process runningProcess, int cpu) {
-        if (runningProcess != null && runningProcess.isFinished()) {
+        if (runningProcess != null && runningProcess.getBurstTime() <= 0) { // Assuming a burst time of 0 indicates completion
             runningProcess = null;
         }
-    
+
         if (runningProcess == null && !readyQueue.isEmpty()) {
             runningProcess = readyQueue.poll();
             platform.log("CPU " + cpu + " is now running process " + runningProcess.getName());
-            numberOfContextSwitches++;
+            contextSwitches++; // Use `contextSwitches` inherited from Scheduler
         }
-    
+
         if (runningProcess != null) {
             platform.log("CPU " + cpu + " is running process " + runningProcess.getName());
         }
-    
-        return runningProcess;
-    }
 
-    public int getNumberOfContextSwitches() {
-        return numberOfContextSwitches;
+        return runningProcess;
     }
 }
